@@ -108,7 +108,7 @@ html {
 .station-logo-container-pseudo::after {
   z-index: -1;
   position: absolute;
-  content: "";
+  content: '';
   bottom: 23px;
   left: 10px;
   width: 85%;
@@ -162,4 +162,63 @@ html {
     font-size: 15vw;
     line-height: 15vw;
   }
+}
+
+.station-active ::after {
+  z-index: -1;
+  position: absolute;
+  content: '';
+  bottom: 23px;
+  left: 10px;
+  width: 85%;
+  top: 75%;
+  max-width: 300px;
+  box-shadow: 0 24px 10px #f40a35;
+}
+
+.base-logo:hover {
+  transform: scale(1.3);
+}
+.base-logo {
+  transition: transform 0.4s ease-out;
+  cursor: pointer;
+  background-image: url('./logos.webp');
+  width: 120px;
+  height: 90px;
+  background-size: 425px;
+}
+
+.wildstyle {
+  background-position: -25px -10px;
+}
+
+.flash {
+  background-position: -175px -10px;
+}
+
+.vrock {
+  background-position: -150px -105px;
+}
+
+.kchat {
+  background-position: -295px -10px;
+}
+
+.fever {
+  background-position: -20px -105px;
+}
+
+.vcpr {
+  background-position: -290px -105px;
+}
+
+.espantoso {
+  background-position: -15px -200px;
+}
+
+.emotion {
+  background-position: -150px -205px;
+}
+.wave {
+  background-position: -300px -205px;
 }

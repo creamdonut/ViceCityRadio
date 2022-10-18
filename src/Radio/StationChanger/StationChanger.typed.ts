@@ -1,4 +1,6 @@
+import { StationCodes } from 'entities/StationCodes.ts';
+
 export interface Props {
-  changeStation: (value: string) => void;
-  radioStation: string;
+  changeStation: (value: StationCodes) => void;
+  radioStation: StationCodes;
 }

@@ -1,69 +1,49 @@
-import React, { FC } from "react";
+import { FC } from 'react';
 
-import YouTube, { Options } from "react-youtube";
+import * as Typed from './Stations.typed';
 
-import * as Typed from "./Stations.typed";
+import YouTube, { YouTubeProps } from 'react-youtube';
+import type { Options } from 'youtube-player/dist/types';
 
-export const Stations: FC<Typed.Props> = ({ radioStation, radio }) => {
+import { YoutubeCodes } from 'entities/YoutubeCodes.ts';
+
+export const Stations: FC<Typed.Props> = ({
+  radioStation,
+  radio,
+  startTime,
+}) => {
   const opts = {
-    height: "0",
-    width: "0",
-    host: "https://www.youtube-nocookie.com",
+    height: '0',
+    width: '0',
+    host: 'https://www.youtube-nocookie.com',
     playerVars: {
       autoplay: 1,
     },
   } as Options;
 
-  const renderRadio = (name: string) => {
-    switch (name) {
-      case "flash":
-        return (
-          <YouTube id="player" ref={radio} videoId="DIcc0wHimtw" opts={opts} />
-        );
-      case "wildstyle":
-        return (
-          <YouTube id="player" ref={radio} videoId="0SXR99_ShJs" opts={opts} />
-        );
-      case "kchat":
-        return (
-          <YouTube id="player" ref={radio} videoId="ylIKhRUEiec" opts={opts} />
-        );
-      case "fever":
-        return (
-          <YouTube id="player" ref={radio} videoId="4owcb9AsK2w" opts={opts} />
-        );
-      case "vrock":
-        return (
-          <YouTube id="player" ref={radio} videoId="Up2qr5K6zc4" opts={opts} />
-        );
-      case "vcpr":
-        return (
-          <YouTube id="player" ref={radio} videoId="O6NoRNcu5Jk" opts={opts} />
-        );
-      case "espantoso":
-        return (
-          <YouTube id="player" ref={radio} videoId="rAWSt1t6nF4" opts={opts} />
-        );
-      case "emotion":
-        return (
-          <YouTube id="player" ref={radio} videoId="VzPG0O4jdjI" opts={opts} />
-        );
-      case "wave":
-        return (
-          <YouTube id="player" ref={radio} videoId="MzbYsoR9dPM" opts={opts} />
-        );
-      default:
-        return <YouTube id="player" ref={radio} opts={opts} />;
-    }
+  const onStationChange: YouTubeProps['onReady'] = (event) => {
+    const difference = Math.floor((Date.now() - startTime) / 1000);
+
+    setTimeout(() => {
+      event.target.seekTo(difference, true);
+    }, 700);
   };
 
   return (
     <>
-      <div className="container">
-        <div className="neon">VICE CITY </div>
-        <div className="flux">RADIO </div>
+      <div className='container'>
+        <div className='neon'>VICE CITY </div>
+        <div className='flux'>RADIO </div>
       </div>
-      <div>{renderRadio(radioStation)}</div>
+      <div>
+        <YouTube
+          id='player'
+          videoId={YoutubeCodes[radioStation]}
+          ref={radio}
+          opts={opts}
+          onReady={onStationChange}
+        />
+      </div>
     </>
   );
 };
